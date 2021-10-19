@@ -1,37 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Button from "./components/Button";
+import "./assests/css/style.css";
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      count: 0
+    };
+  }
 
-class App extends React.Component {
-	constructor (props) {
-		super (props)
-		// create a state with a property count set to 0
-		this.state = {
-		count : 0
-		}
-		// bind the method to the class component 
-		this.go = this.go.bind(this)
-	}
+  incrementCount = () => {
+    this.setState({
+      count: this.state.count + 1
+    });
+  };
 
-	// event handler function 
-	go () {
-		// set the new state by getting previous state 
-		// using (prevState) and increase by 1 
-		this.setState (  prevState => {
-			return {
-				count : prevState.count + 1
-			}
-		})
-	} 
+  decrementCount = () => {
+    this.setState({
+      count: this.state.count - 1
+    });
+  };
 
-	render() {
-		return (
-			<div> 
-				<center>
-				<p> {this.state.count}  <button onClick= {this.go} > like! </button> </p>
-				</center>
-			</div>
-		)
-	}
+  render() {
+    let { count } = this.state;
+    return (
+      <div className="app">
+        <div>
+          <div class="count">
+            <h3>Count:</h3>
+            <h1>{count}</h1>
+          </div>
+          <div class="buttons">
+            <Button title={"-"} action={this.decrementCount} />
+            <Button title={"+"} action={this.incrementCount} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
-export default App;
-
